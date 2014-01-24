@@ -11,7 +11,7 @@ describe 'ValueObject' do
       a_foo.should_not be_nil
     end
 
-    it "works with one parameter" do
+    it "works with parameters" do
       foo = ValueObject.new(:bar)
 
       a_foo = foo.new(bar: 'baz')
