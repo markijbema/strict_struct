@@ -1,6 +1,42 @@
 # ValueObject
 
-TODO: Write a gem description
+This gems aims to provide a modern version of Struct.
+While Struct is a nice easy way to create a light-weight
+value object, it has some drawbacks
+
+* You need to remember the order of arguments
+* The object is mutable by default
+
+This gem aims to avoid these drawbacks, while providing the
+ease of use of Struct.
+
+## Usage
+
+If you want to create a simple object, just declare it like
+you would declare a Struct:
+
+```ruby
+Rectangle = ValueObject.new(:x, :y) do
+  def area
+    x * y
+  end
+end
+```
+
+This would conceptually create the following object:
+
+```ruby
+class Rectange
+  attr_reader :x, :y
+
+  def initialize(x:, y:)
+  end
+
+  def area
+    x * y
+  end
+end
+```
 
 ## Installation
 
@@ -16,7 +52,6 @@ Or install it yourself as:
 
     $ gem install value_object
 
-## Usage
 
 TODO: Write usage instructions here
 
