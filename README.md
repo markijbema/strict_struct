@@ -1,4 +1,4 @@
-# ValueObject [![Build Status](https://travis-ci.org/markijbema/value_object.png)](https://travis-ci.org/markijbema/value_object)
+# ValueObject [![Build Status](https://travis-ci.org/markijbema/value_object.png)](https://travis-ci.org/markijbema/value_object) [![Code Climate](https://codeclimate.com/github/markijbema/value_object.png)](https://codeclimate.com/github/markijbema/value_object)
 
 This gems aims to provide a modern version of Struct.
 While Struct is a nice easy way to create a light-weight
