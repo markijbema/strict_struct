@@ -23,13 +23,15 @@ Rectangle = StrictStruct.new(:x, :y) do
 end
 ```
 
-This would conceptually create the following object:
+This would conceptually create something like the following object:
 
 ```ruby
 class Rectange
   attr_reader :x, :y
 
   def initialize(x:, y:)
+    @x = x
+    @y = y
   end
 
   def area
@@ -37,6 +39,9 @@ class Rectange
   end
 end
 ```
+
+Since this is meant to create immutable objects, the values aren't actually assigned to instance variables but safed internally in a hash.
+
 
 ## Installation
 
