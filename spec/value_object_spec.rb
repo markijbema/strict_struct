@@ -16,8 +16,7 @@ describe 'ValueObject' do
 
       a_foo = foo.new(bar: 'baz')
 
-      a_foo.bar.should eq 'baz'
-      a_foo.should respond_to 'bar'
+      a_foo.should_not be_nil
     end
 
     it "raises an error when an argument is missing" do
@@ -74,6 +73,35 @@ describe 'ValueObject' do
       rectangle.area.should == 15
     end
   end
+
+  describe "attribute readers" do
+    it "returns the value initialized with" do
+      foo = ValueObject.new(:bar)
+
+      a_foo = foo.new(bar: 'baz')
+
+      a_foo.bar.should eq 'baz'
+      a_foo.should respond_to 'bar'
+    end
+
+    it "is not defined when the value isn't defined by the class" do
+      foo = ValueObject.new(:bar)
+
+      a_foo = foo.new(bar: 'baz')
+
+      a_foo.should_not respond_to 'gerard'
+    end
+
+    it "raises a NoMethodError when called for a value which isn't defined" do
+      foo = ValueObject.new(:x)
+      a_foo = foo.new(x: 3)
+
+      expect do
+        a_foo.y
+      end.to raise_error NoMethodError, "undefined method `y' for #{a_foo.inspect}"
+    end
+  end
+
 
   describe '#to_h' do
     it "returns all the values the object is defined by" do

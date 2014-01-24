@@ -17,6 +17,10 @@ module ValueObject
       extra_arguments = given.reject {|name| expected.include? name }
       Helper.assert_keyword_error "unknown", extra_arguments
     end
+
+    def self.raise_no_method(method_name, object)
+      raise NoMethodError, "undefined method `#{method_name}' for #{object.inspect}"
+    end
   end
 
   def self.new(*attributes, &block)
@@ -29,6 +33,8 @@ module ValueObject
       end
 
       def method_missing(method, *args)
+        Helper.raise_no_method(method, self) unless @hash.key? method.to_sym
+
         @hash[method.to_sym]
       end
 
