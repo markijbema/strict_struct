@@ -19,6 +19,46 @@ describe 'ValueObject' do
       a_foo.bar.should eq 'baz'
       a_foo.should respond_to 'bar'
     end
+
+    it "raises an error when an argument is missing" do
+      foo = ValueObject.new(:x)
+
+      expect do
+        foo.new()
+      end.to raise_error ArgumentError, "missing keyword: x"
+    end
+
+    it "raises an error when multiple arguments are missing" do
+      foo = ValueObject.new(:x, :y, :z)
+
+      expect do
+        foo.new(z: 'bar')
+      end.to raise_error ArgumentError, "missing keywords: x, y"
+    end
+
+    it "raises an error when an unknown argument is passed in" do
+      foo = ValueObject.new(:x)
+
+      expect do
+        foo.new(x: 'foo', z: 'bar')
+      end.to raise_error ArgumentError, "unknown keyword: z"
+    end
+
+    it "raises an error when multiple unknown argument are passed in" do
+      foo = ValueObject.new(:x)
+
+      expect do
+        foo.new(x: 'foo', z: 'bar', w: 'baz')
+      end.to raise_error ArgumentError, "unknown keywords: z, w"
+    end
+
+    it "raises a missing error when both missing arguments and unknown arguments are passed in" do
+      foo = ValueObject.new(:x, :y)
+
+      expect do
+        foo.new(x: 'foo', w: 'baz')
+      end.to raise_error ArgumentError, "missing keyword: y"
+    end
   end
 
   describe 'defining one' do
@@ -47,7 +87,7 @@ describe 'ValueObject' do
 
   describe '#==' do
     it "returns true if the values are the same" do
-      foo = ValueObject.new(:bar, :baz)
+      foo = ValueObject.new(:bar)
 
       a_foo = foo.new(bar: 'baz')
       another_foo = foo.new(bar: 'baz')
@@ -55,7 +95,7 @@ describe 'ValueObject' do
       a_foo.should eq another_foo
     end
     it "returns true if the values are the same" do
-      foo = ValueObject.new(:bar, :baz)
+      foo = ValueObject.new(:bar)
 
       a_foo = foo.new(bar: 'baz')
       another_foo = foo.new(bar: 'not_baz')
