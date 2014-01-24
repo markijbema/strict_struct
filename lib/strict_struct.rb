@@ -1,6 +1,6 @@
-#require "value_object/version"
+#require "strict_struct/version"
 
-module ValueObject
+module StrictStruct
   module Helper
     def self.assert_keyword_error type, keywords
       if keywords.length == 1
@@ -17,10 +17,6 @@ module ValueObject
       extra_arguments = given.reject {|name| expected.include? name }
       Helper.assert_keyword_error "unknown", extra_arguments
     end
-
-    def self.raise_no_method(method_name, object)
-      raise NoMethodError, "undefined method `#{method_name}' for #{object.inspect}"
-    end
   end
 
   def self.new(*attributes, &block)
@@ -32,14 +28,8 @@ module ValueObject
         Helper.validate_arguments(@hash.keys, @@attributes)
       end
 
-      def method_missing(method, *args)
-        Helper.raise_no_method(method, self) unless @hash.key? method.to_sym
-
-        @hash[method.to_sym]
-      end
-
-      def respond_to_missing?(method, include_all=false)
-        @hash.key? method.to_sym
+      attributes.each do |attribute|
+        define_method(attribute) {|| @hash[attribute] }
       end
 
       def to_h

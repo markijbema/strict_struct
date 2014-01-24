@@ -1,4 +1,4 @@
-# ValueObject [![Build Status](https://travis-ci.org/markijbema/value_object.png)](https://travis-ci.org/markijbema/value_object) [![Code Climate](https://codeclimate.com/github/markijbema/value_object.png)](https://codeclimate.com/github/markijbema/value_object)
+# StrictStruct [![Build Status](https://travis-ci.org/markijbema/strict_struct.png)](https://travis-ci.org/markijbema/strict_struct) [![Code Climate](https://codeclimate.com/github/markijbema/strict_struct.png)](https://codeclimate.com/github/markijbema/strict_struct)
 
 This gems aims to provide a modern version of Struct.
 While Struct is a nice easy way to create a light-weight
@@ -16,7 +16,7 @@ If you want to create a simple object, just declare it like
 you would declare a Struct:
 
 ```ruby
-Rectangle = ValueObject.new(:x, :y) do
+Rectangle = StrictStruct.new(:x, :y) do
   def area
     x * y
   end
@@ -42,7 +42,7 @@ end
 
 Add this line to your application's Gemfile:
 
-    gem 'value_object'
+    gem 'strict_struct'
 
 And then execute:
 
@@ -50,7 +50,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install value_object
+    $ gem install strict_struct
 
 
 TODO: Write usage instructions here

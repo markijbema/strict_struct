@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'value_object/version'
+require 'strict_struct/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "value_object"
-  spec.version       = ValueObject::VERSION
+  spec.name          = "strict_struct"
+  spec.version       = StrictStruct::VERSION
   spec.authors       = ["Mark IJbema"]
   spec.email         = ["markijbema@gmail.com"]
   spec.description   = %q{Extremely simple value objects}
-  spec.summary       = %q{ValueObject is an immutable, named parameters based, replacement for Struct}
-  spec.homepage      = "https://github.com/markijbema/value_object"
+  spec.summary       = %q{StrictStruct is an immutable, named parameters based, replacement for Struct}
+  spec.homepage      = "https://github.com/markijbema/strict_struct"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

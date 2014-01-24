@@ -1,10 +1,10 @@
 require 'spec_helper'
-require 'value_object'
+require 'strict_struct'
 
-describe 'ValueObject' do
+describe 'StrictStruct' do
   describe 'initialization' do
     it "works without parameters" do
-      foo = ValueObject.new
+      foo = StrictStruct.new
 
       a_foo = foo.new
 
@@ -12,7 +12,7 @@ describe 'ValueObject' do
     end
 
     it "works with parameters" do
-      foo = ValueObject.new(:bar)
+      foo = StrictStruct.new(:bar)
 
       a_foo = foo.new(bar: 'baz')
 
@@ -20,7 +20,7 @@ describe 'ValueObject' do
     end
 
     it "raises an error when an argument is missing" do
-      foo = ValueObject.new(:x)
+      foo = StrictStruct.new(:x)
 
       expect do
         foo.new()
@@ -28,7 +28,7 @@ describe 'ValueObject' do
     end
 
     it "raises an error when multiple arguments are missing" do
-      foo = ValueObject.new(:x, :y, :z)
+      foo = StrictStruct.new(:x, :y, :z)
 
       expect do
         foo.new(z: 'bar')
@@ -36,7 +36,7 @@ describe 'ValueObject' do
     end
 
     it "raises an error when an unknown argument is passed in" do
-      foo = ValueObject.new(:x)
+      foo = StrictStruct.new(:x)
 
       expect do
         foo.new(x: 'foo', z: 'bar')
@@ -44,7 +44,7 @@ describe 'ValueObject' do
     end
 
     it "raises an error when multiple unknown argument are passed in" do
-      foo = ValueObject.new(:x)
+      foo = StrictStruct.new(:x)
 
       expect do
         foo.new(x: 'foo', z: 'bar', w: 'baz')
@@ -52,7 +52,7 @@ describe 'ValueObject' do
     end
 
     it "raises a missing error when both missing arguments and unknown arguments are passed in" do
-      foo = ValueObject.new(:x, :y)
+      foo = StrictStruct.new(:x, :y)
 
       expect do
         foo.new(x: 'foo', w: 'baz')
@@ -62,7 +62,7 @@ describe 'ValueObject' do
 
   describe 'defining one' do
     it "allows to define methods using block" do
-      rectangle_class = ValueObject.new(:x, :y) do
+      rectangle_class = StrictStruct.new(:x, :y) do
         def area
           x * y
         end
@@ -76,7 +76,7 @@ describe 'ValueObject' do
 
   describe "attribute readers" do
     it "returns the value initialized with" do
-      foo = ValueObject.new(:bar)
+      foo = StrictStruct.new(:bar)
 
       a_foo = foo.new(bar: 'baz')
 
@@ -85,7 +85,7 @@ describe 'ValueObject' do
     end
 
     it "is not defined when the value isn't defined by the class" do
-      foo = ValueObject.new(:bar)
+      foo = StrictStruct.new(:bar)
 
       a_foo = foo.new(bar: 'baz')
 
@@ -93,7 +93,7 @@ describe 'ValueObject' do
     end
 
     it "raises a NoMethodError when called for a value which isn't defined" do
-      foo = ValueObject.new(:x)
+      foo = StrictStruct.new(:x)
       a_foo = foo.new(x: 3)
 
       expect do
@@ -105,7 +105,7 @@ describe 'ValueObject' do
 
   describe '#to_h' do
     it "returns all the values the object is defined by" do
-      foo = ValueObject.new(:bar, :baz)
+      foo = StrictStruct.new(:bar, :baz)
 
       a_foo = foo.new(bar: 'baz', baz: 3)
 
@@ -115,7 +115,7 @@ describe 'ValueObject' do
 
   describe '#==' do
     it "returns true if the values are the same" do
-      foo = ValueObject.new(:bar)
+      foo = StrictStruct.new(:bar)
 
       a_foo = foo.new(bar: 'baz')
       another_foo = foo.new(bar: 'baz')
@@ -123,7 +123,7 @@ describe 'ValueObject' do
       a_foo.should eq another_foo
     end
     it "returns true if the values are the same" do
-      foo = ValueObject.new(:bar)
+      foo = StrictStruct.new(:bar)
 
       a_foo = foo.new(bar: 'baz')
       another_foo = foo.new(bar: 'not_baz')
