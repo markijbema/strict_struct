@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = ValueObject::VERSION
   spec.authors       = ["Mark IJbema"]
   spec.email         = ["markijbema@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{Extremely simple value objects}
+  spec.summary       = %q{ValueObject is an immutable, named parameters based, replacement for Struct}
+  spec.homepage      = "https://github.com/markijbema/value_object"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
