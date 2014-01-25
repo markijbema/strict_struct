@@ -24,8 +24,8 @@ module StrictStruct
       @@attributes = attributes
 
       define_method :initialize do |hash={}|
-        @hash = hash
-        Helper.validate_arguments(@hash.keys, @@attributes)
+        Helper.validate_arguments(hash.keys, @@attributes)
+        @_strict_struct_hash = Hash[hash.to_a].freeze
       end
 
       attributes.each do |attribute|
@@ -35,7 +35,7 @@ module StrictStruct
       end
 
       def to_h
-        @hash
+        Hash[@_strict_struct_hash.to_a]
       end
 
       def == (other)

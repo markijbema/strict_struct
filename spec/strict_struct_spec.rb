@@ -102,6 +102,25 @@ describe 'StrictStruct' do
     end
   end
 
+  describe 'immutability' do
+    let(:klass) { StrictStruct.new(:x) }
+
+    it "isn't broken by modifiying the input hash" do
+      params = {x: 'foo'}
+      k = klass.new(params)
+      params[:x] = 'bar'
+
+      k.x.should eq 'foo'
+    end
+
+    it "isn't broken by modifying output of to_h" do
+      k = klass.new(x: 'foo')
+      hash = k.to_h
+      hash[:x] = 'bar'
+
+      k.x.should eq 'foo'
+    end
+  end
 
   describe '#to_h' do
     it "returns all the values the object is defined by" do
