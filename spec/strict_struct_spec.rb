@@ -98,7 +98,7 @@ describe 'StrictStruct' do
 
       expect do
         a_foo.y
-      end.to raise_error NoMethodError, "undefined method `y' for #{a_foo.inspect}"
+      end.to raise_error NoMethodError
     end
   end
 
