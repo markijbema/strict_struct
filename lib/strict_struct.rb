@@ -29,7 +29,9 @@ module StrictStruct
       end
 
       attributes.each do |attribute|
-        define_method(attribute) {|| @hash[attribute] }
+        define_method(attribute) do
+          @_strict_struct_hash[attribute]
+        end
       end
 
       def to_h
