@@ -1,4 +1,4 @@
-# StrictStruct [![Build Status](https://travis-ci.org/markijbema/strict_struct.png)](https://travis-ci.org/markijbema/strict_struct) [![Code Climate](https://codeclimate.com/github/markijbema/strict_struct.png)](https://codeclimate.com/github/markijbema/strict_struct) [![Gem Version](https://badge.fury.io/rb/strict_struct.png)](http://badge.fury.io/rb/strict_struct) [![Gem Version](https://badge.fury.io/rb/strict_struct.png)](http://badge.fury.io/rb/strict_struct)
+# StrictStruct [![Build Status](https://travis-ci.org/markijbema/strict_struct.png)](https://travis-ci.org/markijbema/strict_struct) [![Code Climate](https://codeclimate.com/github/markijbema/strict_struct.png)](https://codeclimate.com/github/markijbema/strict_struct) [![Gem Version](https://badge.fury.io/rb/strict_struct.png)](http://badge.fury.io/rb/strict_struct) [![Dependency Status](https://gemnasium.com/markijbema/strict_struct.png)](https://gemnasium.com/markijbema/strict_struct)
 
 This gems aims to provide a modern version of Struct.
 While Struct is a nice easy way to create a light-weight
