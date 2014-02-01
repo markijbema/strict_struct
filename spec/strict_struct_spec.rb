@@ -58,6 +58,13 @@ describe 'StrictStruct' do
         foo.new(x: 'foo', w: 'baz')
       end.to raise_error ArgumentError, "missing keyword: y"
     end
+
+    it "doesn't influence initialisation of another class" do
+      first = StrictStruct.new(:x)
+      second = StrictStruct.new(:y)
+
+      x = first.new(x: 3)
+    end
   end
 
   describe 'defining one' do
