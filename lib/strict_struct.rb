@@ -37,6 +37,8 @@ module StrictStruct
       end
 
       define_method :== do |other|
+        return false unless self.class == other.class
+
         attributes.all? {|name| self.send(name) == other.send(name)}
       end
     end

@@ -148,7 +148,8 @@ describe 'StrictStruct' do
 
       a_foo.should eq another_foo
     end
-    it "returns true if the values are the same" do
+
+    it "returns false if the values are not the same" do
       foo = StrictStruct.new(:bar)
 
       a_foo = foo.new(bar: 'baz')
@@ -156,5 +157,17 @@ describe 'StrictStruct' do
 
       a_foo.should_not eq another_foo
     end
+
+    it "returns false if two values are different StrictStructs" do
+      chicken_class = StrictStruct.new(:wings)
+      plane_class = StrictStruct.new(:wings)
+
+      chicken = chicken_class.new(wings: 2)
+      plane = plane_class.new(wings: 2)
+
+      plane.should_not eq chicken
+    end
+  end
+
   end
 end
