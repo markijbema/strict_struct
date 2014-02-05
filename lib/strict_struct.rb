@@ -41,6 +41,10 @@ module StrictStruct
 
         attributes.all? {|name| self.send(name) == other.send(name)}
       end
+
+      define_method :hash do
+        @_strict_struct_hash.hash
+      end
     end
     klass.class_eval(&block) if block_given?
     klass

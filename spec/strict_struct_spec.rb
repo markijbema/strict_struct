@@ -169,5 +169,31 @@ describe 'StrictStruct' do
     end
   end
 
+  describe '#hash' do
+    it "returns the same value for two empty objects" do
+      empty = StrictStruct.new
+      empty.new.hash.should == empty.new.hash
+    end
+
+    it "returns a different value for two non-empty objects with different content" do
+      container = StrictStruct.new(:a)
+
+      first = container.new(a: 1)
+      second = container.new(a: 2)
+
+      first.hash.should_not == second.hash
+    end
+
+    it "returns the same value for two non-empty objects with the same content" do
+      container = StrictStruct.new(:a)
+
+      first = container.new(a: 1)
+      second = container.new(a: 1)
+
+      first.hash.should == second.hash
+    end
+
+    # we need no guarantee that objects with the same content, but different classes
+    # return different hashes
   end
 end
