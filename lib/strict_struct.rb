@@ -20,7 +20,7 @@ module StrictStruct
   end
 
   def self.new(*attributes, &block)
-    klass = Class.new do
+    mod = Module.new do
       define_method :initialize do |hash={}|
         Helper.validate_arguments(hash.keys, attributes)
         @_strict_struct_hash = Hash[hash.to_a].freeze
@@ -33,6 +33,10 @@ module StrictStruct
       end
 
       def to_h
+        to_hash
+      end
+
+      def to_hash
         Hash[@_strict_struct_hash.to_a]
       end
 
@@ -40,6 +44,8 @@ module StrictStruct
         attributes.all? {|name| self.send(name) == other.send(name)}
       end
     end
+    klass = Class.new
+    klass.send :include, mod
     klass.class_eval(&block) if block_given?
     klass
   end
