@@ -220,7 +220,8 @@ describe 'StrictStruct' do
 
       a_foo.should eq another_foo
     end
-    it "returns true if the values are the same" do
+
+    it "returns false if the values are not the same" do
       foo = StrictStruct.new(:bar)
 
       a_foo = foo.new(bar: 'baz')
@@ -228,5 +229,43 @@ describe 'StrictStruct' do
 
       a_foo.should_not eq another_foo
     end
+
+    it "returns false if two values are different StrictStructs" do
+      chicken_class = StrictStruct.new(:wings)
+      plane_class = StrictStruct.new(:wings)
+
+      chicken = chicken_class.new(wings: 2)
+      plane = plane_class.new(wings: 2)
+
+      plane.should_not eq chicken
+    end
+  end
+
+  describe '#hash' do
+    it "returns the same value for two empty objects" do
+      empty = StrictStruct.new
+      empty.new.hash.should == empty.new.hash
+    end
+
+    it "returns a different value for two non-empty objects with different content" do
+      container = StrictStruct.new(:a)
+
+      first = container.new(a: 1)
+      second = container.new(a: 2)
+
+      first.hash.should_not == second.hash
+    end
+
+    it "returns the same value for two non-empty objects with the same content" do
+      container = StrictStruct.new(:a)
+
+      first = container.new(a: 1)
+      second = container.new(a: 1)
+
+      first.hash.should == second.hash
+    end
+
+    # we need no guarantee that objects with the same content, but different classes
+    # return different hashes
   end
 end

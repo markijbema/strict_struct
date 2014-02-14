@@ -41,7 +41,13 @@ module StrictStruct
       end
 
       define_method :== do |other|
+        return false unless self.class == other.class
+
         attributes.all? {|name| self.send(name) == other.send(name)}
+      end
+
+      define_method :hash do
+        @_strict_struct_hash.hash
       end
     end
     klass = Class.new
