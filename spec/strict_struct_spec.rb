@@ -137,6 +137,78 @@ describe 'StrictStruct' do
 
       a_foo.to_h.should eq({bar: 'baz', baz: 3})
     end
+
+    it "is possible to override, and reuse using super" do
+      foo = StrictStruct.new(:bar, :baz) do
+        def to_h
+          super.merge pirate: 'captain'
+        end
+      end
+
+      a_foo = foo.new(bar: 'baz', baz: 3)
+
+      a_foo.to_h.should eq({bar: 'baz', baz: 3, pirate: 'captain'})
+    end
+  end
+
+  describe '#to_hash' do
+    it "returns all the values the object is defined by" do
+      foo = StrictStruct.new(:bar, :baz)
+
+      a_foo = foo.new(bar: 'baz', baz: 3)
+
+      a_foo.to_hash.should eq({bar: 'baz', baz: 3})
+    end
+  end
+
+  describe "extending to_h with extra fields" do
+    it "extends to_h, leaves to_hash alone" do
+      foo = StrictStruct.new(:bar, :baz) do
+        def to_h
+          super.merge pirate: 'captain'
+        end
+      end
+
+      a_foo = foo.new(bar: 'baz', baz: 3)
+
+      a_foo.to_h.should eq({bar: 'baz', baz: 3, pirate: 'captain'})
+      a_foo.to_hash.should eq({bar: 'baz', baz: 3})
+    end
+  end
+
+  describe "extending to_hash with extra fields" do
+    it "extends both to_hash and to_h" do
+      foo = StrictStruct.new(:bar, :baz) do
+        def to_hash
+          super.merge pirate: 'captain'
+        end
+      end
+
+      a_foo = foo.new(bar: 'baz', baz: 3)
+
+      a_foo.to_h.should eq({bar: 'baz', baz: 3, pirate: 'captain'})
+      a_foo.to_hash.should eq({bar: 'baz', baz: 3, pirate: 'captain'})
+    end
+  end
+
+  describe "extending to_h and to_hash" do
+    it "extends both with the extensions to to_hash, and to_h also with its own extensions" do
+      foo = StrictStruct.new(:bar, :baz) do
+        def to_hash
+          super.merge pirate: 'captain'
+        end
+
+        def to_h
+          super.merge samurai: 'sword'
+        end
+      end
+
+      a_foo = foo.new(bar: 'baz', baz: 3)
+
+      a_foo.to_h.should eq({bar: 'baz', baz: 3, pirate: 'captain', samurai: 'sword'})
+      a_foo.to_hash.should eq({bar: 'baz', baz: 3, pirate: 'captain'})
+
+    end
   end
 
   describe '#==' do
