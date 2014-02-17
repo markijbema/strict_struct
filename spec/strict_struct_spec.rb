@@ -265,7 +265,13 @@ describe 'StrictStruct' do
       first.hash.should == second.hash
     end
 
-    # we need no guarantee that objects with the same content, but different classes
-    # return different hashes
+    it "returns a different value for two different objects" do |variable|
+      container = StrictStruct.new(:a)
+
+      first = container.new(a: 1)
+      second = container.new(a: 2)
+
+      first.hash.should_not == second.hash
+    end
   end
 end
