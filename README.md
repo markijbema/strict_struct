@@ -34,6 +34,17 @@ class Rectange
     @y = y
   end
 
+  def to_h
+    to_h
+  end
+
+  def to_hash
+    {
+      x: x,
+      y: y
+    }
+  end
+
   def area
     x * y
   end
@@ -42,6 +53,21 @@ end
 
 Since this is meant to create immutable objects, the values aren't actually assigned to instance variables but safed internally in a hash.
 
+### Changing behaviour
+
+You can also choose to override behaviour. You can just use super in the initialization block like you are used to with normal classes:
+
+```ruby
+Rectangle = StrictStruct.new(:x, :y) do
+  def area
+    x * y
+  end
+
+  def to_hash
+    super.merge({area: area})
+  end
+end
+```
 
 ## Installation
 
