@@ -1,4 +1,4 @@
-#require "strict_struct/version"
+require "strict_struct/version"
 
 module StrictStruct
   module Helper
