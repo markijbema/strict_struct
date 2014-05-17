@@ -135,7 +135,7 @@ describe 'StrictStruct' do
 
       a_foo = foo.new(bar: 'baz', baz: 3)
 
-      expect(a_foo.to_h).to eq({bar: 'baz', baz: 3})
+      expect(a_foo.to_h).to eq({ bar: 'baz', baz: 3 })
     end
 
     it "is possible to override, and reuse using super" do
@@ -147,7 +147,7 @@ describe 'StrictStruct' do
 
       a_foo = foo.new(bar: 'baz', baz: 3)
 
-      expect(a_foo.to_h).to eq({bar: 'baz', baz: 3, pirate: 'captain'})
+      expect(a_foo.to_h).to eq({ bar: 'baz', baz: 3, pirate: 'captain' })
     end
   end
 
@@ -157,7 +157,7 @@ describe 'StrictStruct' do
 
       a_foo = foo.new(bar: 'baz', baz: 3)
 
-      expect(a_foo.to_hash).to eq({bar: 'baz', baz: 3})
+      expect(a_foo.to_hash).to eq({ bar: 'baz', baz: 3 })
     end
   end
 
@@ -171,8 +171,8 @@ describe 'StrictStruct' do
 
       a_foo = foo.new(bar: 'baz', baz: 3)
 
-      expect(a_foo.to_h).to eq({bar: 'baz', baz: 3, pirate: 'captain'})
-      expect(a_foo.to_hash).to eq({bar: 'baz', baz: 3})
+      expect(a_foo.to_h).to eq({ bar: 'baz', baz: 3, pirate: 'captain' })
+      expect(a_foo.to_hash).to eq({ bar: 'baz', baz: 3 })
     end
   end
 
@@ -186,8 +186,8 @@ describe 'StrictStruct' do
 
       a_foo = foo.new(bar: 'baz', baz: 3)
 
-      expect(a_foo.to_h).to eq({bar: 'baz', baz: 3, pirate: 'captain'})
-      expect(a_foo.to_hash).to eq({bar: 'baz', baz: 3, pirate: 'captain'})
+      expect(a_foo.to_h).to eq({ bar: 'baz', baz: 3, pirate: 'captain' })
+      expect(a_foo.to_hash).to eq({ bar: 'baz', baz: 3, pirate: 'captain' })
     end
   end
 
@@ -205,8 +205,8 @@ describe 'StrictStruct' do
 
       a_foo = foo.new(bar: 'baz', baz: 3)
 
-      expect(a_foo.to_h).to eq({bar: 'baz', baz: 3, pirate: 'captain', samurai: 'sword'})
-      expect(a_foo.to_hash).to eq({bar: 'baz', baz: 3, pirate: 'captain'})
+      expect(a_foo.to_h).to eq({ bar: 'baz', baz: 3, pirate: 'captain', samurai: 'sword' })
+      expect(a_foo.to_hash).to eq({ bar: 'baz', baz: 3, pirate: 'captain' })
     end
   end
 
