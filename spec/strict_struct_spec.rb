@@ -8,7 +8,7 @@ describe 'StrictStruct' do
 
       a_foo = foo.new
 
-      a_foo.should_not be_nil
+      expect(a_foo).to_not be_nil
     end
 
     it "works with parameters" do
@@ -16,7 +16,7 @@ describe 'StrictStruct' do
 
       a_foo = foo.new(bar: 'baz')
 
-      a_foo.should_not be_nil
+      expect(a_foo).to_not be_nil
     end
 
     it "raises an error when an argument is missing" do
@@ -77,7 +77,7 @@ describe 'StrictStruct' do
 
       rectangle = rectangle_class.new(x: 3, y: 5)
 
-      rectangle.area.should == 15
+      expect(rectangle.area).to eq 15
     end
   end
 
@@ -87,8 +87,8 @@ describe 'StrictStruct' do
 
       a_foo = foo.new(bar: 'baz')
 
-      a_foo.bar.should eq 'baz'
-      a_foo.should respond_to 'bar'
+      expect(a_foo.bar).to eq 'baz'
+      expect(a_foo).to respond_to 'bar'
     end
 
     it "is not defined when the value isn't defined by the class" do
@@ -96,7 +96,7 @@ describe 'StrictStruct' do
 
       a_foo = foo.new(bar: 'baz')
 
-      a_foo.should_not respond_to 'gerard'
+      expect(a_foo).to_not respond_to 'gerard'
     end
 
     it "raises a NoMethodError when called for a value which isn't defined" do
@@ -117,7 +117,7 @@ describe 'StrictStruct' do
       k = klass.new(params)
       params[:x] = 'bar'
 
-      k.x.should eq 'foo'
+      expect(k.x).to eq 'foo'
     end
 
     it "isn't broken by modifying output of to_h" do
@@ -125,7 +125,7 @@ describe 'StrictStruct' do
       hash = k.to_h
       hash[:x] = 'bar'
 
-      k.x.should eq 'foo'
+      expect(k.x).to eq 'foo'
     end
   end
 
@@ -135,7 +135,7 @@ describe 'StrictStruct' do
 
       a_foo = foo.new(bar: 'baz', baz: 3)
 
-      a_foo.to_h.should eq({bar: 'baz', baz: 3})
+      expect(a_foo.to_h).to eq({ bar: 'baz', baz: 3 })
     end
 
     it "is possible to override, and reuse using super" do
@@ -147,7 +147,7 @@ describe 'StrictStruct' do
 
       a_foo = foo.new(bar: 'baz', baz: 3)
 
-      a_foo.to_h.should eq({bar: 'baz', baz: 3, pirate: 'captain'})
+      expect(a_foo.to_h).to eq({ bar: 'baz', baz: 3, pirate: 'captain' })
     end
   end
 
@@ -157,7 +157,7 @@ describe 'StrictStruct' do
 
       a_foo = foo.new(bar: 'baz', baz: 3)
 
-      a_foo.to_hash.should eq({bar: 'baz', baz: 3})
+      expect(a_foo.to_hash).to eq({ bar: 'baz', baz: 3 })
     end
   end
 
@@ -171,8 +171,8 @@ describe 'StrictStruct' do
 
       a_foo = foo.new(bar: 'baz', baz: 3)
 
-      a_foo.to_h.should eq({bar: 'baz', baz: 3, pirate: 'captain'})
-      a_foo.to_hash.should eq({bar: 'baz', baz: 3})
+      expect(a_foo.to_h).to eq({ bar: 'baz', baz: 3, pirate: 'captain' })
+      expect(a_foo.to_hash).to eq({ bar: 'baz', baz: 3 })
     end
   end
 
@@ -186,8 +186,8 @@ describe 'StrictStruct' do
 
       a_foo = foo.new(bar: 'baz', baz: 3)
 
-      a_foo.to_h.should eq({bar: 'baz', baz: 3, pirate: 'captain'})
-      a_foo.to_hash.should eq({bar: 'baz', baz: 3, pirate: 'captain'})
+      expect(a_foo.to_h).to eq({ bar: 'baz', baz: 3, pirate: 'captain' })
+      expect(a_foo.to_hash).to eq({ bar: 'baz', baz: 3, pirate: 'captain' })
     end
   end
 
@@ -205,9 +205,8 @@ describe 'StrictStruct' do
 
       a_foo = foo.new(bar: 'baz', baz: 3)
 
-      a_foo.to_h.should eq({bar: 'baz', baz: 3, pirate: 'captain', samurai: 'sword'})
-      a_foo.to_hash.should eq({bar: 'baz', baz: 3, pirate: 'captain'})
-
+      expect(a_foo.to_h).to eq({ bar: 'baz', baz: 3, pirate: 'captain', samurai: 'sword' })
+      expect(a_foo.to_hash).to eq({ bar: 'baz', baz: 3, pirate: 'captain' })
     end
   end
 
@@ -218,7 +217,7 @@ describe 'StrictStruct' do
       a_foo = foo.new(bar: 'baz')
       another_foo = foo.new(bar: 'baz')
 
-      a_foo.should eq another_foo
+      expect(a_foo).to eq another_foo
     end
 
     it "returns false if the values are not the same" do
@@ -227,7 +226,7 @@ describe 'StrictStruct' do
       a_foo = foo.new(bar: 'baz')
       another_foo = foo.new(bar: 'not_baz')
 
-      a_foo.should_not eq another_foo
+      expect(a_foo).to_not eq another_foo
     end
 
     it "returns false if two values are different StrictStructs" do
@@ -237,14 +236,14 @@ describe 'StrictStruct' do
       chicken = chicken_class.new(wings: 2)
       plane = plane_class.new(wings: 2)
 
-      plane.should_not eq chicken
+      expect(plane).to_not eq chicken
     end
   end
 
   describe '#hash' do
     it "returns the same value for two empty objects" do
       empty = StrictStruct.new
-      empty.new.hash.should == empty.new.hash
+      expect(empty.new.hash).to eq empty.new.hash
     end
 
     it "returns a different value for two non-empty objects with different content" do
@@ -253,7 +252,7 @@ describe 'StrictStruct' do
       first = container.new(a: 1)
       second = container.new(a: 2)
 
-      first.hash.should_not == second.hash
+      expect(first.hash).to_not eq second.hash
     end
 
     it "returns the same value for two non-empty objects with the same content" do
@@ -262,7 +261,7 @@ describe 'StrictStruct' do
       first = container.new(a: 1)
       second = container.new(a: 1)
 
-      first.hash.should == second.hash
+      expect(first.hash).to eq second.hash
     end
 
     it "returns a different value for two different objects" do |variable|
@@ -271,7 +270,7 @@ describe 'StrictStruct' do
       first = container.new(a: 1)
       second = container.new(a: 2)
 
-      first.hash.should_not == second.hash
+      expect(first.hash).to_not eq second.hash
     end
   end
 end
