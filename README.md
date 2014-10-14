@@ -1,7 +1,7 @@
 # StrictStruct [![Build Status](https://travis-ci.org/markijbema/strict_struct.png)](https://travis-ci.org/markijbema/strict_struct) [![Code Climate](https://codeclimate.com/github/markijbema/strict_struct.png)](https://codeclimate.com/github/markijbema/strict_struct) [![Gem Version](https://badge.fury.io/rb/strict_struct.png)](http://badge.fury.io/rb/strict_struct) [![Dependency Status](https://gemnasium.com/markijbema/strict_struct.png)](https://gemnasium.com/markijbema/strict_struct)
 
 This gems aims to provide a modern version of Struct.
-While Struct is a nice easy way to create a light-weight
+While Struct is a nice and easy way to create a light-weight
 value object, it has some drawbacks
 
 * You need to remember the order of arguments
@@ -35,7 +35,7 @@ class Rectange
   end
 
   def to_h
-    to_h
+    to_hash
   end
 
   def to_hash
@@ -51,11 +51,11 @@ class Rectange
 end
 ```
 
-Since this is meant to create immutable objects, the values aren't actually assigned to instance variables but safed internally in a hash.
+Since this is meant to create immutable objects, the values aren't actually assigned to instance variables but saved internally in a hash.
 
-### Changing behaviour
+### Changing behavior
 
-You can also choose to override behaviour. You can just use super in the initialization block like you are used to with normal classes:
+You can also choose to override behavior. You can just use super in the initialization block like you are used to with normal classes:
 
 ```ruby
 Rectangle = StrictStruct.new(:x, :y) do
