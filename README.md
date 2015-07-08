@@ -84,8 +84,6 @@ Or install it yourself as:
     $ gem install strict_struct
 
 
-TODO: Write usage instructions here
-
 ## Contributing
 
 1. Fork it
